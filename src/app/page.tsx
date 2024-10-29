@@ -25,14 +25,14 @@ export default function HomePage() {
       title: "Eventos presidenciales",
       icon: Tickets,
       content: "Eventos presidenciales",
-      url: "/eventos%20presidenciales",
+      url: "/eventos-presidenciales",
       footer: "Elecciones y eventos electorales",
     },
     {
       title: "Índices",
       icon: ChartColumn,
       content: "Inflación y riesgo",
-      url: "#",
+      url: "/inflacion/mensual",
       footer: "Inflación y riesgo",
     },
     {

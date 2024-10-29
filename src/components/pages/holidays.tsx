@@ -7,10 +7,9 @@ import {
   CardTitle,
 } from "../ui/card";
 import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+import { relativeTime } from "@/lib/utils";
 import { Badge, BadgeProps } from "../ui/badge";
-
-dayjs.extend(relativeTime);
+import { PageGallery, PageWrapper } from "./page-wrapper";
 
 export async function Holidays() {
   const year = new Date().getFullYear();
@@ -32,11 +31,11 @@ export async function Holidays() {
   );
 
   return (
-    <main className="flex flex-1 flex-col gap-4 p-4 pt-0">
+    <PageWrapper>
       <h3 className="text-sm">
         {holidays.length} feriados para el {year}
       </h3>
-      <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+      <PageGallery>
         <h4 className="col-span-full text-lg font-bold">Próximos Feriados</h4>
         {upcoming.map((holiday: Holiday) => (
           <HolidayCard
@@ -51,12 +50,12 @@ export async function Holidays() {
             holiday={holiday}
           />
         ))}
-      </div>
-    </main>
+      </PageGallery>
+    </PageWrapper>
   );
 }
 
-enum HolidayType {
+enum HolidayEnum {
   puente = "puente",
   inamovible = "inamovible",
   trasladable = "trasladable",
@@ -64,9 +63,9 @@ enum HolidayType {
 
 function HolidayCard({ holiday }: { holiday: Holiday }) {
   const badgeVariant = {
-    [HolidayType.puente]: "outline",
-    [HolidayType.inamovible]: "destructive",
-    [HolidayType.trasladable]: "secondary",
+    [HolidayEnum.puente]: "outline",
+    [HolidayEnum.inamovible]: "destructive",
+    [HolidayEnum.trasladable]: "secondary",
   };
   return (
     <Card
@@ -78,12 +77,12 @@ function HolidayCard({ holiday }: { holiday: Holiday }) {
       </CardHeader>
       <CardContent>
         <p className="font-bold">{holiday.nombre}</p>
-        <p>{dayjs().to(dayjs(holiday.fecha))}</p>
+        <p>{relativeTime(holiday.fecha)}</p>
       </CardContent>
       <CardFooter>
         <Badge
           variant={
-            badgeVariant[holiday.tipo as HolidayType] as BadgeProps["variant"]
+            badgeVariant[holiday.tipo as HolidayEnum] as BadgeProps["variant"]
           }
         >
           {holiday.tipo}

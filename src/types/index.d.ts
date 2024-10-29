@@ -4,6 +4,11 @@ type Holiday = {
   tipo: string;
 };
 
+type CommonResponse = {
+  fecha: string;
+  valor: number;
+};
+
 type PageCode =
   | "feriados"
   | "eventos-presidenciales"

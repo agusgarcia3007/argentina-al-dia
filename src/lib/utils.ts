@@ -30,3 +30,28 @@ export function findSectionByUrl(
   }
   return undefined;
 }
+
+export function relativeTime(date: string) {
+  const now = new Date();
+  const diffInMs = new Date(date).getTime() - now.getTime();
+  const rtf = new Intl.RelativeTimeFormat("es", { numeric: "always" });
+
+  const diffInSeconds = Math.floor(diffInMs / 1000);
+  const diffInMinutes = Math.floor(diffInSeconds / 60);
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  const diffInDays = Math.floor(diffInHours / 24);
+  const diffInMonths = Math.floor(diffInDays / 30);
+  const diffInYears = Math.floor(diffInDays / 365);
+
+  return Math.abs(diffInSeconds) < 60
+    ? rtf.format(diffInSeconds, "second")
+    : Math.abs(diffInMinutes) < 60
+    ? rtf.format(diffInMinutes, "minute")
+    : Math.abs(diffInHours) < 24
+    ? rtf.format(diffInHours, "hour")
+    : Math.abs(diffInDays) < 30
+    ? rtf.format(diffInDays, "day")
+    : Math.abs(diffInMonths) < 12
+    ? rtf.format(diffInMonths, "month")
+    : rtf.format(diffInYears, "year");
+}

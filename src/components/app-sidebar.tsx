@@ -50,7 +50,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={sections} />
       </SidebarContent>
-      <SidebarFooter>Boton de github</SidebarFooter>
+      <SidebarFooter>{/* <StarButton /> */}</SidebarFooter>
     </Sidebar>
   );
 }

@@ -5,7 +5,11 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { sections } from "@/lib/sections";
 import { findSectionByUrl } from "@/lib/utils";
 
-export default async function Page({ params }: { params: { slug: string[] } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>;
+}) {
   const { slug: slugs } = await params;
 
   const pageCode = findSectionByUrl(
